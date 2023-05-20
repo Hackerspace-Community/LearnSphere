@@ -151,11 +151,23 @@
         </div>
     </form>
 
-    <button onclick="submitForms()">Submit All Forms</button>
+    
+    <div class="border border-dark border-5 mt-4 mb-2 p-5">
+        <h2>Your Roadmap</h2>
+        <p id="result-data">
+            ....loading roadmap
+        </p>
+    </div>
 
+    <div id="html-output"></div>
+
+    <button onclick="submitForms()">Get Rodmap</button>
+
+    
     <script>
         const submitForms = async () => {
             // Get form elements and values
+            const resultData = document.getElementById('result-data');
             var fieldForm = document.getElementById('field');
             var subjectForm = document.getElementById('subject');
             var knowledgeForm = document.getElementById('knowledge');
@@ -203,13 +215,19 @@
             var jsonData = JSON.stringify(formData);
 
 
-            await fetch('http://127.0.0.1:3000/submit', {
+            const response = await fetch('/submit', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: jsonData
             })
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log(data);
+                resultData.innerHTML = data.data.result;
+            }
             // Perform further actions (e.g., submit the JSON data to the server)
             // ...
         }

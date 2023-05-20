@@ -1,7 +1,11 @@
 import requests
 import json
+import os
+from dotenv import load_dotenv
 
-API_KEY = ' '
+load_dotenv()
+
+API_KEY = os.getenv('API_KEY')
 API_URL = 'https://api.openai.com/v1/chat/completions'
 
 def query_chatgpt(query):
@@ -17,7 +21,6 @@ def query_chatgpt(query):
 
     response = requests.post(API_URL, headers=headers, json=data)
     response_data = response.json()
-    print(response_data)
 
     return response_data['choices'][0]['message']['content']
 
@@ -36,7 +39,8 @@ def query(resdata):
     # 6 -7 days in a week and 2-4 hrs a day and i can learn from video audio and
     #  book and also say how much time it will take along with links
 
-    query = f"Give me a learning path in json format for {resdata['subject']} in {resdata['field']} i know {knowlst} i can give {resdata['days']} in a week and {'hrs'} per day i prefer learning from {learnlst} also tell me how much time it will take to complete and provide the links too."
-    print(query)
+    query = f"Give me a learning path for {resdata['subject']} in {resdata['field']} i know {knowlst} i can give {resdata['days']} in a week and {'hrs'} per day i prefer learning from {learnlst} also tell me how much time it will take to complete and provide the links too."
+    # query2 = "what is 2+2"
     response = query_chatgpt(query)
+    print(response)
     return response

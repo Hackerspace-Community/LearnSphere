@@ -1,8 +1,8 @@
-from flask import Flask, render_template,request
+from flask import Flask, redirect, render_template,request, url_for, jsonify
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 
-from new import query
+from gpt import query
 app = Flask(__name__)
 Bootstrap(app)
 
@@ -13,11 +13,17 @@ def index():
 @app.route('/submit', methods=['GET', 'POST'])
 def submit():
     # get form data
-    data = request.get_json()
-    print(data)
-        # Print the received data
-    result =  query(data)
-    return render_template('submit.html')
+    if request.method == 'POST':
+        data = request.get_json()
+        result = query(data)
+        print("Result",result)
+        return jsonify(data = {
+            'result': result
+        })
+        
+@app.route('/result', methods=['GET', 'POST'])
+def result():
+    return render_template('result.html')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
