@@ -10,7 +10,7 @@ Follow these steps to set up the project:
 
 1. Clone the repository
 ```bash
-git clone https://github.com/your-username/LearnSphere.git
+git clone git@github.com:HarshitRV/LearnSphere.git
 ```
 
 2. Create a virtual environment for the project. If you're not familiar with creating virtual environments, you can refer to this guide: [How to Setup Virtual Environments in Python](https://www.freecodecamp.org/news/how-to-setup-virtual-environments-in-python/)
