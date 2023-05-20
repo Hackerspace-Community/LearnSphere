@@ -1,2 +1,168 @@
 {% include "header.html" %}
-<h1>LearnSphere</h1>
+
+<div class="container">
+
+    <h1>LearnSphere</h1>
+
+    <!-- Field Form -->
+    <form name="field" id="field" method="POST" action="submit.html">
+        <!-- Choose your field -->
+        <div class="formField border border-primary border-5 mt-4 p-5">
+            <h1>Choose Your Field</h1>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                <label class="form-check-label" for="flexRadioDefault1">
+                    Computer
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                <label class="form-check-label" for="flexRadioDefault2">
+                    Maths
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" checked>
+                <label class="form-check-label" for="flexRadioDefault3">
+                    Astrology
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4" checked>
+                <label class="form-check-label" for="flexRadioDefault4">
+                    Biology
+                </label>
+            </div>
+        </div>
+    </form>
+
+    <!-- Subject Form -->
+    <form name="subject" id="subject" method="POST" action="submit.html">
+        <!-- Choose your Subject -->
+        <div class="formSub border border-success border-5 mt-4 p-5">
+            <h1>Choose Your Subject</h1>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                <label class="form-check-label" for="flexRadioDefault1">
+                    ML
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                <label class="form-check-label" for="flexRadioDefault2">
+                    Web Development
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" checked>
+                <label class="form-check-label" for="flexRadioDefault3">
+                    Backend Development
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4" checked>
+                <label class="form-check-label" for="flexRadioDefault4">
+                    System Design
+                </label>
+            </div>
+        </div>
+    </form>
+
+    <!-- Knowledge Form -->
+    <form name="knowledge" id="knowledge" method="POST" action="submit.html">
+        <!-- Choose your Knowledge -->
+        <div class="formKnow border border-danger border-5 mt-4 p-5">
+            <h1>Choose Your Knowledge</h1>
+            <input type="checkbox" id="know1" name="know1">
+            <label for="know1"> Python</label><br>
+            <input type="checkbox" id="know2" name="know2">
+            <label for="know2"> Java</label><br>
+            <input type="checkbox" id="know3" name="know3">
+            <label for="know3"> Django</label><br>
+            <input type="checkbox" id="know4" name="know4">
+            <label for="know4"> Flask</label><br>
+            <input type="checkbox" id="know5" name="know5">
+            <label for="know5"> Js</label>
+        </div>
+    </form>
+
+
+    <!-- Choose your Time -->
+    <div class="formKnow border border-warning border-5 mt-4 p-5">
+        <!-- Time Form -->
+        <form name="days" id="days" method="POST" action="submit.html">
+            <h1>Choose Your Time</h1>
+            <h2 class="mt-2">Days in Week</h2>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                <label class="form-check-label" for="flexRadioDefault1">
+                    2-4 Days
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                <label class="form-check-label" for="flexRadioDefault2">
+                    4-6 Days
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" checked>
+                <label class="form-check-label" for="flexRadioDefault3">
+                    6-7 Days
+                </label>
+            </div>
+        </form>
+
+        <!-- Hours Form -->
+        <form name="hrs" id="hrs" method="POST" action="submit.html">
+            <h2 class="mt-2">Hours in a Day</h2>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                <label class="form-check-label" for="flexRadioDefault1">
+                    2-4 hrs
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                <label class="form-check-label" for="flexRadioDefault2">
+                    4-6 hrs
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" checked>
+                <label class="form-check-label" for="flexRadioDefault3">
+                    6-7 hrs
+                </label>
+            </div>
+    </div>
+    </form>
+
+    <!-- Learning type Form -->
+    <form name="learn" id="learn" method="POST" action="submit.html">
+        <!-- Choose your Learning type -->
+        <div class="formKnow border border-dark border-5 mt-4 mb-2 p-5">
+            <h1>Choose Your Learning Type</h1>
+            <input type="checkbox" id="learn1" name="learn1">
+            <label for="learn1">Video</label><br>
+            <input type="checkbox" id="learn2" name="learn2">
+            <label for="learn2">Blog</label><br>
+            <input type="checkbox" id="learn3" name="learn3">
+            <label for="learn3">Audio</label><br>
+        </div>
+    </form>
+
+    <button onclick="submitForms()">Submit All Forms</button>
+
+    <script>
+      // Function to submit all forms
+      function submitForms() {
+        document.getElementById("field").submit();
+        document.getElementById("subject").submit();
+        document.getElementById("knowledge").submit();
+        document.getElementById("days").submit();
+        document.getElementById("hrs").submit();
+        document.getElementById("learn").submit();
+        // Add more form submissions here if needed
+      }
+    </script>
+</div>
