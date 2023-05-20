@@ -1,4 +1,4 @@
-# LearnSphere 
+# LearnSphere ⦡
 
 <img src="https://i.imgur.com/r88JjEV.png">
 
@@ -32,3 +32,5 @@ API_KEY=YOUR_OPEN_AI_API_KEY
 python main.py
 ```
 8. Open your web browser and navigate to http://localhost:3000 to see the LearnSphere server in action.
+
+### [See Demo (click here) 🎥](https://www.youtube.com/watch?v=cpgLHeSlJuE)
