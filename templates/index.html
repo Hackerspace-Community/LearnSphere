@@ -5,7 +5,7 @@
     <h1>LearnSphere</h1>
 
     <!-- Field Form -->
-    <form name="field" id="field" method="POST" action="submit.html">
+    <form name="field" id="field" method="POST">
         <!-- Choose your field -->
         <div class="formField border border-primary border-5 mt-4 p-5">
             <h1>Choose Your Field</h1>
@@ -37,7 +37,7 @@
     </form>
 
     <!-- Subject Form -->
-    <form name="subject" id="subject" method="POST" action="submit.html">
+    <form name="subject" id="subject" method="POST" action="/submit">
         <!-- Choose your Subject -->
         <div class="formSub border border-success border-5 mt-4 p-5">
             <h1>Choose Your Subject</h1>
@@ -69,19 +69,19 @@
     </form>
 
     <!-- Knowledge Form -->
-    <form name="knowledge" id="knowledge" method="POST" action="submit.html">
+    <form name="knowledge" id="knowledge" method="POST" action="/submit">
         <!-- Choose your Knowledge -->
         <div class="formKnow border border-danger border-5 mt-4 p-5">
             <h1>Choose Your Knowledge</h1>
-            <input type="checkbox" id="know1" name="know1">
+            <input type="checkbox" id="know1" name="know1" value="python">
             <label for="know1"> Python</label><br>
-            <input type="checkbox" id="know2" name="know2">
+            <input type="checkbox" id="know2" name="know2" value="java">
             <label for="know2"> Java</label><br>
-            <input type="checkbox" id="know3" name="know3">
+            <input type="checkbox" id="know3" name="know3" value="django">
             <label for="know3"> Django</label><br>
-            <input type="checkbox" id="know4" name="know4">
+            <input type="checkbox" id="know4" name="know4" value="flask">
             <label for="know4"> Flask</label><br>
-            <input type="checkbox" id="know5" name="know5">
+            <input type="checkbox" id="know5" name="know5" value="javascript">
             <label for="know5"> Js</label>
         </div>
     </form>
@@ -90,7 +90,7 @@
     <!-- Choose your Time -->
     <div class="formKnow border border-warning border-5 mt-4 p-5">
         <!-- Time Form -->
-        <form name="days" id="days" method="POST" action="submit.html">
+        <form name="days" id="days" method="POST" action="/submit">
             <h1>Choose Your Time</h1>
             <h2 class="mt-2">Days in Week</h2>
             <div class="form-check">
@@ -114,7 +114,7 @@
         </form>
 
         <!-- Hours Form -->
-        <form name="hrs" id="hrs" method="POST" action="submit.html">
+        <form name="hrs" id="hrs" method="POST" action="/submit">
             <h2 class="mt-2">Hours in a Day</h2>
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
@@ -138,15 +138,15 @@
     </form>
 
     <!-- Learning type Form -->
-    <form name="learn" id="learn" method="POST" action="submit.html">
+    <form name="learn" id="learn" method="POST">
         <!-- Choose your Learning type -->
         <div class="formKnow border border-dark border-5 mt-4 mb-2 p-5">
             <h1>Choose Your Learning Type</h1>
-            <input type="checkbox" id="learn1" name="learn1">
+            <input type="checkbox" id="learn1" name="learn1" value="video">
             <label for="learn1">Video</label><br>
-            <input type="checkbox" id="learn2" name="learn2">
+            <input type="checkbox" id="learn2" name="learn2" value="blog">
             <label for="learn2">Blog</label><br>
-            <input type="checkbox" id="learn3" name="learn3">
+            <input type="checkbox" id="learn3" name="learn3" value="audio">
             <label for="learn3">Audio</label><br>
         </div>
     </form>
@@ -154,15 +154,65 @@
     <button onclick="submitForms()">Submit All Forms</button>
 
     <script>
-      // Function to submit all forms
-      function submitForms() {
-        document.getElementById("field").submit();
-        document.getElementById("subject").submit();
-        document.getElementById("knowledge").submit();
-        document.getElementById("days").submit();
-        document.getElementById("hrs").submit();
-        document.getElementById("learn").submit();
-        // Add more form submissions here if needed
-      }
+        const submitForms = async () => {
+            // Get form elements and values
+            var fieldForm = document.getElementById('field');
+            var subjectForm = document.getElementById('subject');
+            var knowledgeForm = document.getElementById('knowledge');
+            var daysForm = document.getElementById('days');
+            var hrsForm = document.getElementById('hrs');
+            var learnForm = document.getElementById('learn');
+
+            // Create an object to store form data
+            var formData = {};
+
+            // Get field value
+            var field = fieldForm.querySelector('input[name="flexRadioDefault"]:checked').parentNode.textContent.trim();
+            formData.field = field;
+
+            // Get subject value
+            var subject = subjectForm.querySelector('input[name="flexRadioDefault"]:checked').parentNode.textContent.trim();
+            formData.subject = subject;
+
+            // Get knowledge values
+            var knowledgeInputs = knowledgeForm.querySelectorAll('input[type="checkbox"]:checked');
+            console.log(knowledgeInputs);
+            var knowledge = [];
+            knowledgeInputs.forEach(function (input) {
+                knowledge.push(input.value);
+            });
+            formData.knowledge = knowledge;
+
+            // Get days value
+            var days = daysForm.querySelector('input[name="flexRadioDefault"]:checked').parentNode.textContent.trim();
+            formData.days = days;
+
+            // Get hours value
+            var hrs = hrsForm.querySelector('input[name="flexRadioDefault"]:checked').parentNode.textContent.trim();
+            formData.hrs = hrs;
+
+            // Get learning type values
+            var learnInputs = learnForm.querySelectorAll('input[type="checkbox"]:checked');
+            var learn = [];
+            learnInputs.forEach(function (input) {
+                learn.push(input.value);
+            });
+            formData.learn = learn;
+
+            // Create JSON object
+            var jsonData = JSON.stringify(formData);
+
+
+            await fetch('http://127.0.0.1:3000/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: jsonData
+            })
+            // Perform further actions (e.g., submit the JSON data to the server)
+            // ...
+        }
     </script>
+
 </div>
