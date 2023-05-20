@@ -1,7 +1,7 @@
 import requests
 import json
 
-API_KEY = ''
+API_KEY = ' '
 API_URL = 'https://api.openai.com/v1/chat/completions'
 
 def query_chatgpt(query):
