@@ -1,8 +1,8 @@
 {% include "header.html" %}
 
-<div class="container">
+<div class="container mt-5 mb-5">
 
-    <h1>LearnSphere</h1>
+    <h1>🌏 LearnSphere ⦡</h1>
 
     <!-- Field Form -->
     <form name="field" id="field" method="POST">
@@ -151,69 +151,108 @@
         </div>
     </form>
 
-    
-    <div class="border border-dark border-5 mt-4 mb-2 p-5">
-        <h2>Your Roadmap</h2>
-        <p id="result-data">
-            ....loading roadmap
-        </p>
+    <div id="result-div">
+        <!-- <div class="border border-dark border-5 mt-4 mb-2 p-5">
+            <h2>Get your roadmap</h2>
+            <div id="result-data">
+
+            </div>
+        </div> -->
     </div>
+
 
     <div id="html-output"></div>
 
-    <button onclick="submitForms()">Get Rodmap</button>
-
+    <div id="result-btn">
+        <button id="submit-btn" class="btn btn-primary w-100" onclick="submitForms()">Generate Rodmap</button>
+    </div>
     
     <script>
+        const renderResultDiv = () => {
+            const resultDiv = document.getElementById('result-div');
+            resultDiv.innerHTML = `
+                <div class="border border-dark border-5 mt-4 mb-2 p-5">
+                    <div id="result-data">
+                    </div>
+                </div>
+            `;
+        }
+
+        const renderSpinner = () => {
+            const spinner = `
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            `;
+            document.getElementById('result-data').innerHTML = spinner;
+        }
+
+        const renderDisabledButton = () => {
+            const resultBtnDiv = document.getElementById('result-btn');
+            resultBtnDiv.innerHTML = `
+                <button id="submit-btn" class="btn btn-primary w-100" disabled>
+                    Creating a personalized roadmap for you...
+                </button>
+            `;
+        }
+
+        const renderEnabledButton = () => {
+            const resultBtnDiv = document.getElementById('result-btn');
+            resultBtnDiv.innerHTML = `
+                <button id="submit-btn" class="btn btn-danger w-100" onclick="submitForms()">Generate another roadmap</button>
+            `;
+        }
+
         const submitForms = async () => {
+            renderResultDiv();
+            renderSpinner();
+            renderDisabledButton();
             // Get form elements and values
             const resultData = document.getElementById('result-data');
-            var fieldForm = document.getElementById('field');
-            var subjectForm = document.getElementById('subject');
-            var knowledgeForm = document.getElementById('knowledge');
-            var daysForm = document.getElementById('days');
-            var hrsForm = document.getElementById('hrs');
-            var learnForm = document.getElementById('learn');
+            const fieldForm = document.getElementById('field');
+            const subjectForm = document.getElementById('subject');
+            const knowledgeForm = document.getElementById('knowledge');
+            const daysForm = document.getElementById('days');
+            const hrsForm = document.getElementById('hrs');
+            const learnForm = document.getElementById('learn');
 
             // Create an object to store form data
-            var formData = {};
+            const formData = {};
 
             // Get field value
-            var field = fieldForm.querySelector('input[name="flexRadioDefault"]:checked').parentNode.textContent.trim();
+            const field = fieldForm.querySelector('input[name="flexRadioDefault"]:checked').parentNode.textContent.trim();
             formData.field = field;
 
             // Get subject value
-            var subject = subjectForm.querySelector('input[name="flexRadioDefault"]:checked').parentNode.textContent.trim();
+            const subject = subjectForm.querySelector('input[name="flexRadioDefault"]:checked').parentNode.textContent.trim();
             formData.subject = subject;
 
             // Get knowledge values
-            var knowledgeInputs = knowledgeForm.querySelectorAll('input[type="checkbox"]:checked');
-            console.log(knowledgeInputs);
-            var knowledge = [];
+            const knowledgeInputs = knowledgeForm.querySelectorAll('input[type="checkbox"]:checked');
+            const knowledge = [];
             knowledgeInputs.forEach(function (input) {
                 knowledge.push(input.value);
             });
             formData.knowledge = knowledge;
 
             // Get days value
-            var days = daysForm.querySelector('input[name="flexRadioDefault"]:checked').parentNode.textContent.trim();
+            const days = daysForm.querySelector('input[name="flexRadioDefault"]:checked').parentNode.textContent.trim();
             formData.days = days;
 
             // Get hours value
-            var hrs = hrsForm.querySelector('input[name="flexRadioDefault"]:checked').parentNode.textContent.trim();
+            const hrs = hrsForm.querySelector('input[name="flexRadioDefault"]:checked').parentNode.textContent.trim();
             formData.hrs = hrs;
 
             // Get learning type values
-            var learnInputs = learnForm.querySelectorAll('input[type="checkbox"]:checked');
-            var learn = [];
+            const learnInputs = learnForm.querySelectorAll('input[type="checkbox"]:checked');
+            const learn = [];
             learnInputs.forEach(function (input) {
                 learn.push(input.value);
             });
             formData.learn = learn;
 
             // Create JSON object
-            var jsonData = JSON.stringify(formData);
-
+            const jsonData = JSON.stringify(formData);
 
             const response = await fetch('/submit', {
                 method: 'POST',
@@ -222,11 +261,12 @@
                 },
                 body: jsonData
             })
-
+         
             if (response.ok) {
                 const data = await response.json();
                 console.log(data);
                 resultData.innerHTML = data.data.result;
+                renderEnabledButton();
             }
             // Perform further actions (e.g., submit the JSON data to the server)
             // ...
