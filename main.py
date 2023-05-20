@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template,request
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 
+from new import query
 app = Flask(__name__)
 Bootstrap(app)
 
@@ -13,9 +14,9 @@ def index():
 def submit():
     # get form data
     data = request.get_json()
-        
-        # Print the received data
     print(data)
+        # Print the received data
+    result =  query(data)
     return render_template('submit.html')
 
 @app.route('/register', methods=['GET', 'POST'])
